@@ -96,13 +96,193 @@ public class Teste {
 				cadastrarCargaBoundary();
 			}
 		});
-
+		
+		buttonConsulExc.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuCargaBoundary.dispose();
+				consultExclCargaBoundary();
+				
+			}
+		});
+		
 		buttonSair.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuCargaBoundary.dispose();
 				menuInicialGestaoBoundary();
+			}
+		});
+	}
+
+	protected static void consultExclCargaBoundary() {
+		JButton buttonConsultar = new JButton("Consultar");
+		JButton buttonExcluir = new JButton("Excluir");
+		JButton buttonSair = new JButton("Sair");
+
+		JFrame consultarExcluirCargaBoundary = new JFrame("Consultar/Excluir pela placa - Veiculo de Carga");
+		consultarExcluirCargaBoundary.setLayout(null);
+		consultarExcluirCargaBoundary.setSize(yAltura, xLargura);
+		consultarExcluirCargaBoundary.setVisible(true);
+		consultarExcluirCargaBoundary.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		JLabel lblPlaca = new JLabel("Informe a placa:");
+		lblPlaca.setForeground(Color.red);
+		lblPlaca.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblPlaca.setBounds(30, 40, 150, 20);
+		consultarExcluirCargaBoundary.add(lblPlaca);
+
+		JTextField txtPlaca = new JTextField();
+		txtPlaca.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtPlaca.setBounds(180, 40, 146, 19);
+		consultarExcluirCargaBoundary.add(txtPlaca);
+
+		JLabel lblTara = new JLabel("Tara:");
+		lblTara.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblTara.setBounds(30, 70, 150, 20);
+		consultarExcluirCargaBoundary.add(lblTara);
+
+		JTextField txtTara = new JTextField();
+		txtTara.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtTara.setBounds(180, 70, 146, 19);
+		consultarExcluirCargaBoundary.add(txtTara);
+		
+		JLabel lblCargaMax = new JLabel("Carga Max.:");
+		lblCargaMax.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblCargaMax.setBounds(30, 100, 150, 20);
+		consultarExcluirCargaBoundary.add(lblCargaMax);
+
+		JTextField txtCargaMax = new JTextField();
+		txtCargaMax.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtCargaMax.setBounds(180, 100, 146, 19);
+		consultarExcluirCargaBoundary.add(txtCargaMax);
+
+		JLabel lblMarca = new JLabel("Marca:");
+		lblMarca.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblMarca.setBounds(30, 130, 150, 20);
+		consultarExcluirCargaBoundary.add(lblMarca);
+
+		JTextField txtMarca = new JTextField();
+		txtMarca.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtMarca.setBounds(180, 130, 146, 19);
+		consultarExcluirCargaBoundary.add(txtMarca);
+
+		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblModelo.setBounds(30, 160, 150, 20);
+		consultarExcluirCargaBoundary.add(lblModelo);
+
+		JTextField txtModelo = new JTextField();
+		txtModelo.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtModelo.setBounds(180, 160, 146, 19);
+		consultarExcluirCargaBoundary.add(txtModelo);
+
+		JLabel lblCor = new JLabel("Cor:");
+		lblCor.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblCor.setBounds(30, 190, 150, 20);
+		consultarExcluirCargaBoundary.add(lblCor);
+
+		JTextField txtCor = new JTextField();
+		txtCor.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtCor.setBounds(180, 190, 146, 19);
+		consultarExcluirCargaBoundary.add(txtCor);
+
+		JLabel lblQtdRodas = new JLabel("Qtd. Rodas:");
+		lblQtdRodas.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblQtdRodas.setBounds(30, 220, 150, 20);
+		consultarExcluirCargaBoundary.add(lblQtdRodas);
+
+		JTextField txtQtdRodas = new JTextField();
+		txtQtdRodas.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtQtdRodas.setBounds(180, 220, 146, 19);
+		consultarExcluirCargaBoundary.add(txtQtdRodas);
+
+		JLabel lblVelocidadeMax = new JLabel("Velocidade Max:");
+		lblVelocidadeMax.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblVelocidadeMax.setBounds(30, 250, 150, 20);
+		consultarExcluirCargaBoundary.add(lblVelocidadeMax);
+
+		JTextField txtVelocidadeMax = new JTextField();
+		txtVelocidadeMax.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtVelocidadeMax.setBounds(180, 250, 146, 19);
+		consultarExcluirCargaBoundary.add(txtVelocidadeMax);
+
+		JLabel lblQtdPistoes = new JLabel("Qtd. Pistoes:");
+		lblQtdPistoes.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblQtdPistoes.setBounds(30, 280, 150, 20);
+		consultarExcluirCargaBoundary.add(lblQtdPistoes);
+
+		JTextField txtQtdPistoes = new JTextField();
+		txtQtdPistoes.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtQtdPistoes.setBounds(180, 280, 146, 19);
+		consultarExcluirCargaBoundary.add(txtQtdPistoes);
+
+		JLabel lblPotencia = new JLabel("Potencia:");
+		lblPotencia.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblPotencia.setBounds(30, 310, 150, 20);
+		consultarExcluirCargaBoundary.add(lblPotencia);
+
+		JTextField txtPotencia = new JTextField();
+		txtPotencia.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtPotencia.setBounds(180, 310, 146, 19);
+		consultarExcluirCargaBoundary.add(txtPotencia);
+
+		JLabel inferior = new JLabel();
+		inferior.setLayout(new GridLayout(1, 4, 20, 0));
+		inferior.setBounds(30, 480, 500, 19);
+
+		inferior.add(buttonConsultar);
+		inferior.add(buttonExcluir);
+		inferior.add(buttonSair);
+
+		consultarExcluirCargaBoundary.add(inferior);
+
+		txtCargaMax.setEditable(false);
+		txtTara.setEditable(false);
+		txtCor.setEditable(false);
+		txtMarca.setEditable(false);
+		txtModelo.setEditable(false);
+		txtPotencia.setEditable(false);
+		txtQtdPistoes.setEditable(false);
+		txtQtdRodas.setEditable(false);
+		txtVelocidadeMax.setEditable(false);
+		
+		buttonConsultar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index = existeVeiculoCargoPorPlaca(txtPlaca.getText());
+				if (index != -1) {
+					colocarCamposConsulExcluirCarga(txtTara, txtCargaMax, txtMarca, txtModelo, txtCor, txtQtdRodas,
+							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
+				}
+				
+			}
+		});
+		
+		buttonExcluir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index = existeVeiculoCargoPorPlaca(txtPlaca.getText());
+				
+				if (index != -1) {
+					bdVeiculos.getListaCarga().remove(index);
+					JOptionPane.showMessageDialog(null, "Veiculo de Carga com placa: " + txtPlaca.getText() + " foi excluido.", 
+							"Excluido com sucesso", JOptionPane.ERROR_MESSAGE);
+				}
+
+			}
+		});
+		
+		buttonSair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				consultarExcluirCargaBoundary.dispose();
+				menuVeiculoCargaBoundary();
 			}
 		});
 	}
@@ -387,7 +567,7 @@ public class Teste {
 		JButton buttonExcluir = new JButton("Excluir");
 		JButton buttonSair = new JButton("Sair");
 
-		JFrame consultarExcluirPasseioBoundary = new JFrame("Consultar/Excluir pela placa");
+		JFrame consultarExcluirPasseioBoundary = new JFrame("Consultar/Excluir pela placa - Veiculo Passeio");
 		consultarExcluirPasseioBoundary.setLayout(null);
 		consultarExcluirPasseioBoundary.setSize(yAltura, xLargura);
 		consultarExcluirPasseioBoundary.setVisible(true);
@@ -510,7 +690,7 @@ public class Teste {
 				int index = 0;
 				index = existeVeiculoPasseioPorPlaca(txtPlaca.getText());
 				if (index != -1) {
-					colocarCamposConsulExcluir(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
+					colocarCamposConsulExcluirPasseio(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
 							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
 				}
 			}
@@ -524,7 +704,7 @@ public class Teste {
 				index = existeVeiculoPasseioPorPlaca(txtPlaca.getText());
 
 				if (index != -1) {
-					colocarCamposConsulExcluir(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
+					colocarCamposConsulExcluirPasseio(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
 							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
 					bdVeiculos.getListaPasseio().remove(index);
 					JOptionPane.showMessageDialog(null, "Veiculo de Passeio com placa: " + txtPlaca.getText() + " foi excluido.", 
@@ -883,7 +1063,8 @@ public class Teste {
 			}
 		}
 
-		l.entDados("\n\n\t\t NAO exise veiculo de CARGA com esta placa - press<ENTER>");
+		JOptionPane.showMessageDialog(null, "NAO exise veiculo de Carga com esta placa: " + placa,
+				"Placa invalida", JOptionPane.ERROR_MESSAGE);
 
 		return -1;
 	}
@@ -917,7 +1098,7 @@ public class Teste {
 		txtVelocidadeMax.setText("");
 	}
 
-	private static void colocarCamposConsulExcluir(JTextField txtQtdPassageiros, JTextField txtMarca,
+	private static void colocarCamposConsulExcluirPasseio(JTextField txtQtdPassageiros, JTextField txtMarca,
 			JTextField txtModelo, JTextField txtCor, JTextField txtQtdRodas, JTextField txtVelocidadeMax,
 			JTextField txtQtdPistoes, JTextField txtPotencia, int index) {
 		Passeio passeio = bdVeiculos.getListaPasseio().get(index);
@@ -929,6 +1110,21 @@ public class Teste {
 		txtVelocidadeMax.setText(Float.toString(passeio.getVelocMax()));
 		txtQtdPistoes.setText(Integer.toString(passeio.getMotor().getQtdPist()));
 		txtPotencia.setText(Integer.toString(passeio.getMotor().getPotencia()));
+	}
+
+	private static void colocarCamposConsulExcluirCarga(JTextField txtTara, JTextField txtCargaMax, JTextField txtMarca,
+			JTextField txtModelo, JTextField txtCor, JTextField txtQtdRodas, JTextField txtVelocidadeMax,
+			JTextField txtQtdPistoes, JTextField txtPotencia, int index) {
+		Carga carga = bdVeiculos.getListaCarga().get(index);
+		txtCargaMax.setText(Integer.toString(carga.getCargaMax()));
+		txtTara.setText(Integer.toString(carga.getTara()));
+		txtCor.setText(carga.getCor());
+		txtMarca.setText(carga.getMarca());
+		txtModelo.setText(carga.getModelo());
+		txtPotencia.setText(Integer.toString(carga.getQtdRodas()));
+		txtQtdPistoes.setText(Integer.toString(carga.getMotor().getQtdPist()));
+		txtQtdRodas.setText(Integer.toString(carga.getQtdRodas()));
+		txtVelocidadeMax.setText(Float.toString(carga.getVelocMax()));
 	}
 
 }
