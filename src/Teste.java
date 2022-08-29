@@ -1,27 +1,17 @@
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
 
 public class Teste {
-
-	private static Carga carga;
-	private static Passeio passeio;
 
 	private static BDVeiculos bdVeiculos = new BDVeiculos();
 
@@ -325,9 +315,9 @@ public class Teste {
 				txtTara.setEditable(true);
 			}
 		});
-		
+
 		buttonSair.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cadCargaBoundary.dispose();
@@ -373,6 +363,15 @@ public class Teste {
 			}
 		});
 
+		buttonConsulExc.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuPasseioBoundary.dispose();
+				consultExclPasseioBoundary();
+			}
+		});
+
 		buttonSair.addActionListener(new ActionListener() {
 
 			@Override
@@ -381,6 +380,169 @@ public class Teste {
 				menuInicialGestaoBoundary();
 			}
 		});
+	}
+
+	protected static void consultExclPasseioBoundary() {
+		JButton buttonConsultar = new JButton("Consultar");
+		JButton buttonExcluir = new JButton("Excluir");
+		JButton buttonSair = new JButton("Sair");
+
+		JFrame consultarExcluirPasseioBoundary = new JFrame("Consultar/Excluir pela placa");
+		consultarExcluirPasseioBoundary.setLayout(null);
+		consultarExcluirPasseioBoundary.setSize(yAltura, xLargura);
+		consultarExcluirPasseioBoundary.setVisible(true);
+		consultarExcluirPasseioBoundary.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		JLabel lblPlaca = new JLabel("Informe a placa:");
+		lblPlaca.setForeground(Color.red);
+		lblPlaca.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblPlaca.setBounds(30, 40, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblPlaca);
+
+		JTextField txtPlaca = new JTextField();
+		txtPlaca.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtPlaca.setBounds(180, 40, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtPlaca);
+
+		JLabel lblQtdPassageiros = new JLabel("Qtd. Passageiros:");
+		lblQtdPassageiros.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblQtdPassageiros.setBounds(30, 70, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblQtdPassageiros);
+
+		JTextField txtQtdPassageiros = new JTextField();
+		txtQtdPassageiros.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtQtdPassageiros.setBounds(180, 70, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtQtdPassageiros);
+
+		JLabel lblMarca = new JLabel("Marca:");
+		lblMarca.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblMarca.setBounds(30, 100, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblMarca);
+
+		JTextField txtMarca = new JTextField();
+		txtMarca.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtMarca.setBounds(180, 100, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtMarca);
+
+		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblModelo.setBounds(30, 130, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblModelo);
+
+		JTextField txtModelo = new JTextField();
+		txtModelo.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtModelo.setBounds(180, 130, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtModelo);
+
+		JLabel lblCor = new JLabel("Cor:");
+		lblCor.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblCor.setBounds(30, 160, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblCor);
+
+		JTextField txtCor = new JTextField();
+		txtCor.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtCor.setBounds(180, 160, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtCor);
+
+		JLabel lblQtdRodas = new JLabel("Qtd. Rodas:");
+		lblQtdRodas.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblQtdRodas.setBounds(30, 190, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblQtdRodas);
+
+		JTextField txtQtdRodas = new JTextField();
+		txtQtdRodas.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtQtdRodas.setBounds(180, 190, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtQtdRodas);
+
+		JLabel lblVelocidadeMax = new JLabel("Velocidade Max:");
+		lblVelocidadeMax.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblVelocidadeMax.setBounds(30, 220, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblVelocidadeMax);
+
+		JTextField txtVelocidadeMax = new JTextField();
+		txtVelocidadeMax.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtVelocidadeMax.setBounds(180, 220, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtVelocidadeMax);
+
+		JLabel lblQtdPistoes = new JLabel("Qtd. Pistoes:");
+		lblQtdPistoes.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblQtdPistoes.setBounds(30, 250, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblQtdPistoes);
+
+		JTextField txtQtdPistoes = new JTextField();
+		txtQtdPistoes.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtQtdPistoes.setBounds(180, 250, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtQtdPistoes);
+
+		JLabel lblPotencia = new JLabel("Potencia:");
+		lblPotencia.setFont(new Font("Arial Black", Font.BOLD, 12));
+		lblPotencia.setBounds(30, 280, 150, 20);
+		consultarExcluirPasseioBoundary.add(lblPotencia);
+
+		JTextField txtPotencia = new JTextField();
+		txtPotencia.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		txtPotencia.setBounds(180, 280, 146, 19);
+		consultarExcluirPasseioBoundary.add(txtPotencia);
+
+		JLabel inferior = new JLabel();
+		inferior.setLayout(new GridLayout(1, 4, 20, 0));
+		inferior.setBounds(30, 480, 500, 19);
+
+		inferior.add(buttonConsultar);
+		inferior.add(buttonExcluir);
+		inferior.add(buttonSair);
+
+		consultarExcluirPasseioBoundary.add(inferior);
+
+		txtCor.setEditable(false);
+		txtMarca.setEditable(false);
+		txtModelo.setEditable(false);
+		txtPotencia.setEditable(false);
+		txtQtdPassageiros.setEditable(false);
+		txtQtdPistoes.setEditable(false);
+		txtQtdRodas.setEditable(false);
+		txtVelocidadeMax.setEditable(false);
+
+		buttonConsultar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index = 0;
+				index = existeVeiculoPasseioPorPlaca(txtPlaca.getText());
+				if (index != -1) {
+					colocarCamposConsulExcluir(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
+							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
+				}
+			}
+		});
+		
+		buttonExcluir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index = 0;
+				index = existeVeiculoPasseioPorPlaca(txtPlaca.getText());
+
+				if (index != -1) {
+					colocarCamposConsulExcluir(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
+							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
+					bdVeiculos.getListaPasseio().remove(index);
+					JOptionPane.showMessageDialog(null, "Veiculo de Passeio com placa: " + txtPlaca.getText() + " foi excluido.", 
+							"Excluido com sucesso", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+
+		buttonSair.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				consultarExcluirPasseioBoundary.dispose();
+				menuVeiculoPasseioBoundary();
+			}
+		});
+
 	}
 
 	private static void cadastrarPasseioBoundary() {
@@ -707,7 +869,8 @@ public class Teste {
 			}
 		}
 
-		l.entDados("\n\n\t\t NAO exise veiculo de PASSEIO com esta placa - press<ENTER>");
+		JOptionPane.showMessageDialog(null, "NAO exise veiculo de PASSEIO com esta placa: " + placa,
+				"Placa invalida", JOptionPane.ERROR_MESSAGE);
 
 		return -1;
 	}
@@ -752,6 +915,20 @@ public class Teste {
 		txtQtdPistoes.setText("");
 		txtQtdRodas.setText("");
 		txtVelocidadeMax.setText("");
+	}
+
+	private static void colocarCamposConsulExcluir(JTextField txtQtdPassageiros, JTextField txtMarca,
+			JTextField txtModelo, JTextField txtCor, JTextField txtQtdRodas, JTextField txtVelocidadeMax,
+			JTextField txtQtdPistoes, JTextField txtPotencia, int index) {
+		Passeio passeio = bdVeiculos.getListaPasseio().get(index);
+		txtQtdPassageiros.setText(Integer.toString(passeio.getQtdPassageiros()));
+		txtMarca.setText(passeio.getMarca());
+		txtModelo.setText(passeio.getModelo());
+		txtCor.setText(passeio.getCor());
+		txtQtdRodas.setText(Integer.toString(passeio.getQtdRodas()));
+		txtVelocidadeMax.setText(Float.toString(passeio.getVelocMax()));
+		txtQtdPistoes.setText(Integer.toString(passeio.getMotor().getQtdPist()));
+		txtPotencia.setText(Integer.toString(passeio.getMotor().getPotencia()));
 	}
 
 }
