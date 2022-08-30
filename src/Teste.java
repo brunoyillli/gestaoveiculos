@@ -106,16 +106,16 @@ public class Teste {
 
 			}
 		});
-		
+
 		buttonImprExc.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuCargaBoundary.dispose();
 				imprimirExcluirCargaBoundary();
 			}
 		});
-		
+
 		buttonSair.addActionListener(new ActionListener() {
 
 			@Override
@@ -159,17 +159,17 @@ public class Teste {
 		inferior.add(buttonSair);
 
 		imprimirExclCargaBoundary.add(inferior);
-		
+
 		buttonImprimir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				imprimirTodosCargaTabela(imprimirExclCargaBoundary, columnNames, dados);
 			}
 		});
-		
+
 		buttonExcluir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bdVeiculos.getListaCarga().clear();
@@ -177,12 +177,12 @@ public class Teste {
 						"Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
 				imprimirExclCargaBoundary.dispose();
 				imprimirExcluirCargaBoundary();
-				
+
 			}
 		});
-		
+
 		buttonSair.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				imprimirExclCargaBoundary.dispose();
@@ -539,7 +539,6 @@ public class Teste {
 					txtTara.setEditable(false);
 				}
 
-				impCarga();
 			}
 		});
 
@@ -1041,8 +1040,6 @@ public class Teste {
 					txtQtdRodas.setEditable(false);
 					txtVelocidadeMax.setEditable(false);
 				}
-
-				impPasseio();
 			}
 		});
 
@@ -1091,59 +1088,6 @@ public class Teste {
 			throw new VelocException();
 		}
 
-	}
-
-	public static void impPasseio() {
-		System.out.println("\n\t\t Imprimindo todos veiculos de passeio...");
-		for (int count = 0; count < bdVeiculos.getListaPasseio().size(); count++) {
-			System.out.println("Modelo do carro de passeio: " + count + "° " + "Cor: "
-					+ bdVeiculos.getListaPasseio().get(count).getCor() + " " + "Marca: "
-					+ bdVeiculos.getListaPasseio().get(count).getMarca() + " " + "Modelo: "
-					+ bdVeiculos.getListaPasseio().get(count).getModelo() + " " + "Placa: "
-					+ bdVeiculos.getListaPasseio().get(count).getPlaca() + " " + "Quantidade rodada: "
-					+ bdVeiculos.getListaPasseio().get(count).getQtdRodas() + " " + "Velocidade Maxima: "
-					+ bdVeiculos.getListaPasseio().get(count)
-							.calcVel(bdVeiculos.getListaPasseio().get(count).getVelocMax())
-					+ " " + "Potencia: " + bdVeiculos.getListaPasseio().get(count).getMotor().getPotencia() + " "
-					+ "Quantidade Pist: " + bdVeiculos.getListaPasseio().get(count).getMotor().getQtdPist() + " "
-					+ "Quantidade de passageiros: " + bdVeiculos.getListaPasseio().get(count).getQtdPassageiros());
-		}
-	}
-
-	public static void impCarga() {
-		System.out.println("\n\t\t Imprimindo todos veiculos de carga...");
-		for (int count = 0; count < bdVeiculos.getListaCarga().size(); count++) {
-			System.out.println("Modelo do carro de carga: " + count + "° " + "Cor: "
-					+ bdVeiculos.getListaCarga().get(count).getCor() + " " + "Marca: "
-					+ bdVeiculos.getListaCarga().get(count).getMarca() + " " + "Modelo: "
-					+ bdVeiculos.getListaCarga().get(count).getModelo() + " " + "Placa: "
-					+ bdVeiculos.getListaCarga().get(count).getPlaca() + " " + "Quantidade rodada: "
-					+ bdVeiculos.getListaCarga().get(count).getQtdRodas() + " " + "Velocidade Maxima: "
-					+ bdVeiculos.getListaCarga().get(count).calcVel(bdVeiculos.getListaCarga().get(count).getVelocMax())
-					+ " " + "Potencia: " + bdVeiculos.getListaCarga().get(count).getMotor().getPotencia() + " "
-					+ "Quantidade Pist: " + bdVeiculos.getListaCarga().get(count).getMotor().getQtdPist() + " "
-					+ "Tara: " + bdVeiculos.getListaCarga().get(count).getTara() + " " + "Carga maxima: "
-					+ bdVeiculos.getListaCarga().get(count).getCargaMax());
-
-		}
-	}
-
-	public static void impUmPasseio(Passeio passeio, int i) {
-		System.out.println("Modelo do carro de passeio: " + i + "° " + "Cor: " + passeio.getCor() + " " + "Marca: "
-				+ passeio.getMarca() + " " + "Modelo: " + passeio.getModelo() + " " + "Placa: " + passeio.getPlaca()
-				+ " " + "Quantidade rodada: " + passeio.getQtdRodas() + " " + "Velocidade Maxima: "
-				+ passeio.calcVel(passeio.getVelocMax()) + " " + "Potencia: " + passeio.getMotor().getPotencia() + " "
-				+ "Quantidade Pist: " + passeio.getMotor().getQtdPist() + " " + "Quantidade de passageiros: "
-				+ passeio.getQtdPassageiros());
-	}
-
-	public static void impUmCarga(Carga carga, int i) {
-		System.out.println("Modelo do carro de carga: " + i + "° " + "Cor: " + carga.getCor() + " " + "Marca: "
-				+ carga.getMarca() + " " + "Modelo: " + carga.getModelo() + " " + "Placa: " + carga.getPlaca() + " "
-				+ "Quantidade rodada: " + carga.getQtdRodas() + " " + "Velocidade Maxima: "
-				+ carga.calcVel(carga.getVelocMax()) + " " + "Potencia: " + carga.getMotor().getPotencia() + " "
-				+ "Quantidade Pist: " + carga.getMotor().getQtdPist() + " " + "Tara: " + carga.getTara() + " "
-				+ "Carga maxima: " + carga.getCargaMax());
 	}
 
 	public static void verificaPlacaPasseio(Passeio passeio) throws VeicExistException {
