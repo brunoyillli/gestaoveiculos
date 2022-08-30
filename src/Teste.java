@@ -106,13 +106,87 @@ public class Teste {
 
 			}
 		});
-
+		
+		buttonImprExc.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuCargaBoundary.dispose();
+				imprimirExcluirCargaBoundary();
+			}
+		});
+		
 		buttonSair.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuCargaBoundary.dispose();
 				menuInicialGestaoBoundary();
+			}
+		});
+	}
+
+	protected static void imprimirExcluirCargaBoundary() {
+		JButton buttonImprimir = new JButton("Imprimir todos");
+		JButton buttonExcluir = new JButton("Excluir todos");
+		JButton buttonSair = new JButton("Sair");
+
+		JFrame imprimirExclCargaBoundary = new JFrame("Imprimir / Excluir todos - Veiculos Carga");
+		imprimirExclCargaBoundary.setLayout(null);
+		imprimirExclCargaBoundary.setSize(yAltura, xLargura);
+		imprimirExclCargaBoundary.setVisible(true);
+		imprimirExclCargaBoundary.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		String columnNames[] = { "Placa", "Marca", "Modelo", "Cor", "Qtd. Rodas", "Veloc. Max.", "Qtd. Pist",
+				"Pôtencia", "Tara", "Carga Max." };
+
+		Object[][] dados = new Object[bdVeiculos.getListaCarga().size()][10];
+
+		JTable tabela = new JTable(dados, columnNames);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 40, 720, 400);
+		scrollPane.setViewportView(tabela);
+
+		imprimirExclCargaBoundary.add(scrollPane);
+
+		JLabel inferior = new JLabel();
+		inferior.setLayout(new GridLayout(1, 4, 20, 0));
+		inferior.setBounds(30, 480, 500, 19);
+
+		inferior.add(buttonImprimir);
+		inferior.add(buttonExcluir);
+		inferior.add(buttonSair);
+
+		imprimirExclCargaBoundary.add(inferior);
+		
+		buttonImprimir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imprimirTodosCargaTabela(imprimirExclCargaBoundary, columnNames, dados);
+			}
+		});
+		
+		buttonExcluir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bdVeiculos.getListaCarga().clear();
+				JOptionPane.showMessageDialog(null, "Todos veiculos de carga foram excluidos",
+						"Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+				imprimirExclCargaBoundary.dispose();
+				imprimirExcluirCargaBoundary();
+				
+			}
+		});
+		
+		buttonSair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imprimirExclCargaBoundary.dispose();
+				menuVeiculoCargaBoundary();
 			}
 		});
 	}
@@ -1196,6 +1270,30 @@ public class Teste {
 		scrollPane.setViewportView(tabela);
 
 		imprimirExclPasseioBoundary.add(scrollPane);
+	}
+
+	private static void imprimirTodosCargaTabela(JFrame imprimirExclCargaBoundary, String[] columnNames,
+			Object[][] dados) {
+		for (int x = 0; x < bdVeiculos.getListaCarga().size(); x++) {
+			dados[x][0] = bdVeiculos.getListaCarga().get(x).getPlaca();
+			dados[x][1] = bdVeiculos.getListaCarga().get(x).getMarca();
+			dados[x][2] = bdVeiculos.getListaCarga().get(x).getModelo();
+			dados[x][3] = bdVeiculos.getListaCarga().get(x).getCor();
+			dados[x][4] = bdVeiculos.getListaCarga().get(x).getQtdRodas();
+			dados[x][5] = bdVeiculos.getListaCarga().get(x).getVelocMax();
+			dados[x][6] = bdVeiculos.getListaCarga().get(x).getMotor().getQtdPist();
+			dados[x][7] = bdVeiculos.getListaCarga().get(x).getMotor().getPotencia();
+			dados[x][8] = bdVeiculos.getListaCarga().get(x).getTara();
+			dados[x][9] = bdVeiculos.getListaCarga().get(x).getCargaMax();
+		}
+
+		JTable tabela = new JTable(dados, columnNames);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 40, 720, 400);
+		scrollPane.setViewportView(tabela);
+
+		imprimirExclCargaBoundary.add(scrollPane);
 	}
 
 }
