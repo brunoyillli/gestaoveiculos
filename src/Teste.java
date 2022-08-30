@@ -8,14 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class Teste {
 
 	private static BDVeiculos bdVeiculos = new BDVeiculos();
-
-	private static Leitura l = new Leitura();
 
 	private static int yAltura = 800;
 	private static int xLargura = 600;
@@ -96,17 +96,17 @@ public class Teste {
 				cadastrarCargaBoundary();
 			}
 		});
-		
+
 		buttonConsulExc.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuCargaBoundary.dispose();
 				consultExclCargaBoundary();
-				
+
 			}
 		});
-		
+
 		buttonSair.addActionListener(new ActionListener() {
 
 			@Override
@@ -148,7 +148,7 @@ public class Teste {
 		txtTara.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		txtTara.setBounds(180, 70, 146, 19);
 		consultarExcluirCargaBoundary.add(txtTara);
-		
+
 		JLabel lblCargaMax = new JLabel("Carga Max.:");
 		lblCargaMax.setFont(new Font("Arial Black", Font.BOLD, 12));
 		lblCargaMax.setBounds(30, 100, 150, 20);
@@ -248,9 +248,9 @@ public class Teste {
 		txtQtdPistoes.setEditable(false);
 		txtQtdRodas.setEditable(false);
 		txtVelocidadeMax.setEditable(false);
-		
+
 		buttonConsultar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = existeVeiculoCargoPorPlaca(txtPlaca.getText());
@@ -258,27 +258,28 @@ public class Teste {
 					colocarCamposConsulExcluirCarga(txtTara, txtCargaMax, txtMarca, txtModelo, txtCor, txtQtdRodas,
 							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
 				}
-				
+
 			}
 		});
-		
+
 		buttonExcluir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = existeVeiculoCargoPorPlaca(txtPlaca.getText());
-				
+
 				if (index != -1) {
 					bdVeiculos.getListaCarga().remove(index);
-					JOptionPane.showMessageDialog(null, "Veiculo de Carga com placa: " + txtPlaca.getText() + " foi excluido.", 
+					JOptionPane.showMessageDialog(null,
+							"Veiculo de Carga com placa: " + txtPlaca.getText() + " foi excluido.",
 							"Excluido com sucesso", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
 		});
-		
+
 		buttonSair.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				consultarExcluirCargaBoundary.dispose();
@@ -552,6 +553,15 @@ public class Teste {
 			}
 		});
 
+		buttonImprExc.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuPasseioBoundary.dispose();
+				imprimirExcluirPasseioBoundary();
+			}
+		});
+
 		buttonSair.addActionListener(new ActionListener() {
 
 			@Override
@@ -560,6 +570,72 @@ public class Teste {
 				menuInicialGestaoBoundary();
 			}
 		});
+	}
+
+	private static void imprimirExcluirPasseioBoundary() {
+		JButton buttonImprimir = new JButton("Imprimir todos");
+		JButton buttonExcluir = new JButton("Excluir todos");
+		JButton buttonSair = new JButton("Sair");
+
+		JFrame imprimirExclPasseioBoundary = new JFrame("Imprimir / Excluir todos - Veiculos Passeio");
+		imprimirExclPasseioBoundary.setLayout(null);
+		imprimirExclPasseioBoundary.setSize(yAltura, xLargura);
+		imprimirExclPasseioBoundary.setVisible(true);
+		imprimirExclPasseioBoundary.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		String columnNames[] = { "Placa", "Marca", "Modelo", "Cor", "Qtd. Rodas", "Veloc. Max.", "Qtd. Pist",
+				"Pôtencia", "Qtd. Passageiros" };
+
+		Object[][] dados = new Object[bdVeiculos.getListaPasseio().size()][9];
+
+		JTable tabela = new JTable(dados, columnNames);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 40, 720, 400);
+		scrollPane.setViewportView(tabela);
+
+		imprimirExclPasseioBoundary.add(scrollPane);
+
+		JLabel inferior = new JLabel();
+		inferior.setLayout(new GridLayout(1, 4, 20, 0));
+		inferior.setBounds(30, 480, 500, 19);
+
+		inferior.add(buttonImprimir);
+		inferior.add(buttonExcluir);
+		inferior.add(buttonSair);
+
+		imprimirExclPasseioBoundary.add(inferior);
+
+		buttonImprimir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imprimirTodosPasseiosTabela(imprimirExclPasseioBoundary, columnNames, dados);
+			}
+		});
+
+		buttonExcluir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bdVeiculos.getListaPasseio().clear();
+				JOptionPane.showMessageDialog(null, "Todos veiculos de passeio foram excluidos",
+						"Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+				imprimirExclPasseioBoundary.dispose();
+				imprimirExcluirPasseioBoundary();
+			}
+		});
+
+		buttonSair.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imprimirExclPasseioBoundary.dispose();
+				menuVeiculoPasseioBoundary();
+
+			}
+		});
+
 	}
 
 	protected static void consultExclPasseioBoundary() {
@@ -695,9 +771,9 @@ public class Teste {
 				}
 			}
 		});
-		
+
 		buttonExcluir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = 0;
@@ -707,10 +783,11 @@ public class Teste {
 					colocarCamposConsulExcluirPasseio(txtQtdPassageiros, txtMarca, txtModelo, txtCor, txtQtdRodas,
 							txtVelocidadeMax, txtQtdPistoes, txtPotencia, index);
 					bdVeiculos.getListaPasseio().remove(index);
-					JOptionPane.showMessageDialog(null, "Veiculo de Passeio com placa: " + txtPlaca.getText() + " foi excluido.", 
+					JOptionPane.showMessageDialog(null,
+							"Veiculo de Passeio com placa: " + txtPlaca.getText() + " foi excluido.",
 							"Excluido com sucesso", JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 			}
 		});
 
@@ -942,35 +1019,6 @@ public class Teste {
 
 	}
 
-	public static Passeio cadPasseio(Passeio passeio) {
-		System.out.println("\n\n======================Cadastro de veiculos de Passeio======================\n\n");
-		passeio.setCor(l.entDados("Cor: "));
-		passeio.setMarca(l.entDados("Marca: "));
-		passeio.setModelo(l.entDados("Modelo: "));
-		passeio.setPlaca(l.entDados("Placa: "));
-		passeio.setQtdRodas(Integer.parseInt(l.entDados("Quantidade de rodas: ")));
-		passeio.setVelocMax(Float.parseFloat(l.entDados("Velocidade Maxima: ")));
-		passeio.getMotor().setPotencia(Integer.parseInt(l.entDados("Potencia do motor: ")));
-		passeio.getMotor().setQtdPist(Integer.parseInt(l.entDados("Quantidade de pistoes do motor: ")));
-		passeio.setQtdPassageiros(Integer.parseInt(l.entDados("Quantidade de Passageiros: ")));
-		return passeio;
-	}
-
-	public static Carga cadCarga(Carga carga) {
-		System.out.println("\n\n======================Cadastro de veiculos de Carga======================\n\n");
-		carga.setCor(l.entDados("Cor: "));
-		carga.setMarca(l.entDados("Marca: "));
-		carga.setModelo(l.entDados("Modelo: "));
-		carga.setPlaca(l.entDados("Placa: "));
-		carga.setQtdRodas(Integer.parseInt(l.entDados("Quantidade de rodas: ")));
-		carga.getMotor().setPotencia(Integer.parseInt(l.entDados("Potencia do motor: ")));
-		carga.getMotor().setQtdPist(Integer.parseInt(l.entDados("Quantidade de pistoes do motor: ")));
-		carga.setTara(Integer.parseInt(l.entDados("Tara: ")));
-		carga.setCargaMax(Integer.parseInt(l.entDados("Carga maxima: ")));
-		carga.setVelocMax(Float.parseFloat(l.entDados("Velocidade Maxima: ")));
-		return carga;
-	}
-
 	public static void impPasseio() {
 		System.out.println("\n\t\t Imprimindo todos veiculos de passeio...");
 		for (int count = 0; count < bdVeiculos.getListaPasseio().size(); count++) {
@@ -1049,8 +1097,8 @@ public class Teste {
 			}
 		}
 
-		JOptionPane.showMessageDialog(null, "NAO exise veiculo de PASSEIO com esta placa: " + placa,
-				"Placa invalida", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "NAO exise veiculo de PASSEIO com esta placa: " + placa, "Placa invalida",
+				JOptionPane.ERROR_MESSAGE);
 
 		return -1;
 	}
@@ -1063,8 +1111,8 @@ public class Teste {
 			}
 		}
 
-		JOptionPane.showMessageDialog(null, "NAO exise veiculo de Carga com esta placa: " + placa,
-				"Placa invalida", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "NAO exise veiculo de Carga com esta placa: " + placa, "Placa invalida",
+				JOptionPane.ERROR_MESSAGE);
 
 		return -1;
 	}
@@ -1125,6 +1173,29 @@ public class Teste {
 		txtQtdPistoes.setText(Integer.toString(carga.getMotor().getQtdPist()));
 		txtQtdRodas.setText(Integer.toString(carga.getQtdRodas()));
 		txtVelocidadeMax.setText(Float.toString(carga.getVelocMax()));
+	}
+
+	private static void imprimirTodosPasseiosTabela(JFrame imprimirExclPasseioBoundary, String[] columnNames,
+			Object[][] dados) {
+		for (int x = 0; x < bdVeiculos.getListaPasseio().size(); x++) {
+			dados[x][0] = bdVeiculos.getListaPasseio().get(x).getPlaca();
+			dados[x][1] = bdVeiculos.getListaPasseio().get(x).getMarca();
+			dados[x][2] = bdVeiculos.getListaPasseio().get(x).getModelo();
+			dados[x][3] = bdVeiculos.getListaPasseio().get(x).getCor();
+			dados[x][4] = bdVeiculos.getListaPasseio().get(x).getQtdRodas();
+			dados[x][5] = bdVeiculos.getListaPasseio().get(x).getVelocMax();
+			dados[x][6] = bdVeiculos.getListaPasseio().get(x).getMotor().getQtdPist();
+			dados[x][7] = bdVeiculos.getListaPasseio().get(x).getMotor().getPotencia();
+			dados[x][8] = bdVeiculos.getListaPasseio().get(x).getQtdPassageiros();
+		}
+
+		JTable tabela = new JTable(dados, columnNames);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 40, 720, 400);
+		scrollPane.setViewportView(tabela);
+
+		imprimirExclPasseioBoundary.add(scrollPane);
 	}
 
 }
